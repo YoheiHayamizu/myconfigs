@@ -1,0 +1,61 @@
+[lint]
+# Add the `line-too-long` rule to the enforced rule set. By default, Ruff omits rules that
+# overlap with the use of a formatter, like Black, but we can override this behavior by
+# explicitly adding the rule.
+# extend-select = ["E501"]
+
+# Flake8、Black、isort、エラー、警告のみを選択
+select = [
+    "F", # Flake8
+    "B", # Black
+    "I", # isort
+    "E", # error
+    "W", # warning
+]
+ignore = []
+
+# すべてのルールに対して修正を許可（`--fix`を使用した場合）
+fixable = ["ALL"]
+unfixable = []
+
+# `__init__.py`ファイルや特定のサブディレクトリで、`E402`（インポート違反）を無視
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402"]
+
+[format]
+line-length = 119
+
+# デフォルトで除外されるディレクトリ
+exclude = [
+    ".venv",
+    ".git",
+    ".tox",
+    ".mypy_cache",
+    ".pytest_cache",
+    "__pycache__",
+    "build",
+    "dist",
+    "docs",
+    "tests",
+    "tools",
+]
+
+# Blackと同様に、インデントはスペースで
+indent-style = "space"
+indent-width = 4
+
+# Blackと同様に、文字列はダブルクォートを使用
+quote-style = "double"
+
+# Blackと同様に、魔法のカンマ（トレイリングコンマ）を無視しない
+skip-magic-trailing-comma = false
+
+# Blackと同様に、行末文字を自動検出
+line-ending = "auto"
+
+# ドキュメンテーションストリング内のコード例を自動フォーマット
+docstring-code-format = false
+
+# ドキュメンテーションストリング内のコードスニペットの行の長さ
+docstring-code-line-length = "dynamic"
